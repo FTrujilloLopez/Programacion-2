@@ -1,0 +1,20 @@
+# Archivos ejecutables y binarios compilados
+*.exe
+*.out
+*.app
+*.bin
+
+# Archivos objeto / temporales de compilación
+*.o
+*.obj
+
+# Carpetas de compiladores o entornos (C/C++, VS Code, etc.)
+.vscode/
+bin/
+build/
+Debug/
+Release/
+
+# Archivos temporales del sistema operativo
+Thumbs.db
+.DS_Store
