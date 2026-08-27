@@ -51,16 +51,41 @@ begin
      writeln;
 End;
 
-function Max (v:vector; indice:integer; dimL: dim): integer;
-
+{----------------------------------------------------------------------------
+MAXIMOVALOR - Devuelve el maximo valor del vector recibido }
+function ObtenerMaximo(v:vector; indice:integer; ultimo:integer):integer;
+var
+   Max:integer;
 begin
-
+     if (indice >= ultimo) then
+       ObtenerMaximo:=v[indice]
+     else
+       begin
+        Max:=ObtenerMaximo(v,indice + 1,ultimo);
+        if(v[indice] > Max) then
+          ObtenerMaximo:=v[indice]
+        else
+          ObtenerMaximo:=Max;
+       end;
 end;
+
+{----------------------------------------------------------------------------
+SUMADELVECTOR - Suma todos lo numeros que estan en el vector }
+function SumaVector(v:vector; indice:integer; ultimo:integer):integer;
+begin
+   if(indice = ultimo) then
+     SumaVector:=v[indice]
+   else
+     SumaVector:= v[indice] + SumaVector(v,indice + 1,ultimo);
+end;
+
+
 
 {PROGRAMA PRINCIPAL}
 var
    v: vector;
    dimL : dim;
+   indice:integer;
 
 begin
 
@@ -68,6 +93,7 @@ begin
 
      writeln('Nros almacenados: ');
      imprimirVector(v, dimL);
-
+     writeln('Numero Maximo del vector: ',ObtenerMaximo(v,1,dimL));
+     writeln('Suma total del vector: ',SumaVector(v,1,dimL));
      readln;
 end.
