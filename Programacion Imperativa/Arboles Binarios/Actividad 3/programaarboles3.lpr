@@ -1,4 +1,4 @@
-Program programagenerararbol3;
+Program programaarboles3;
 Type
 
   // Lista de enteros
@@ -39,7 +39,7 @@ end;
 
 
 {-----------------------------------------------------------------------------
-CREARLISTA - Genera una lista con números aleatorios }
+CREARLISTA - Genera una lista con nÃºmeros aleatorios }
 procedure crearLista(var l: Lista);
 var
   n: integer;
@@ -79,7 +79,7 @@ end;
 
 
 {-----------------------------------------------------------------------------
-AGREGARATRAS - Agrega un elemento atrás en l}
+AGREGARATRAS - Agrega un elemento atrÃ¡s en l}
 
 Procedure AgregarAtras (var l, ult: listaNivel; a:arbol);
  var nue:listaNivel;
@@ -95,7 +95,7 @@ Procedure AgregarAtras (var l, ult: listaNivel; a:arbol);
 
 
 {-----------------------------------------------------------------------------
-IMPRIMIRPORNIVEL - Muestra los datos del árbol a por niveles }
+IMPRIMIRPORNIVEL - Muestra los datos del Ã¡rbol a por niveles }
 
 Procedure imprimirpornivel(a: arbol);
 var
@@ -160,9 +160,9 @@ procedure EnOrden(a: arbol);
 begin
  if(a <> nil) then
    begin
-     InOrden(a^.HI);
-     writeln(a^.dato,' - ');
-     InOrden(a^.HD);
+     EnOrden(a^.HI);
+     write(a^.dato,' - ');
+     EnOrden(a^.HD);
    end;
 end;
 
@@ -172,7 +172,7 @@ procedure PreOrden(a: arbol);
 begin
  if(a <> nil) then
    begin
-     writeln(a^.dato,' - ');
+     write(a^.dato,' - ');
      PreOrden(a^.HI);
      PreOrden(a^.HD);
    end;
@@ -187,7 +187,7 @@ begin
    begin
     PostOrden(a^.HI);
     PostOrden(a^.HD);
-    write(a^.dato);
+    write(a^.dato,' - ');
    end;
 end;
 
@@ -200,7 +200,7 @@ begin
 
  a:=nil;
 
- CrearListaOrdenada(l);
+ crearLista(l);
  writeln ('Lista generada: ');
  imprimirLista(l);
  writeln('');
@@ -209,8 +209,10 @@ begin
  imprimirpornivel(a);
  writeln('PreOrden ');
  PreOrden(a);
+ writeln('');
  writeln('EnOrden ');
  EnOrden(a);
+ writeln('');
  writeln('PostOrden ');
  PostOrden(a);
 
