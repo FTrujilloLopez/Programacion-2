@@ -1,4 +1,4 @@
-Program programaarboles4;
+Program programaarboles;
 Type
 
   // Lista de enteros
@@ -124,7 +124,7 @@ begin
 end;
 
 {-----------------------------------------------------------------------------
-Modulo de insertar dato en arbol ordenadamente con recursividad  B)---}
+Modulo de insertar dato en arbol ordenadamente con recursividad }
 
 procedure Insertar(var a:arbol ; d: integer);
 begin
@@ -143,7 +143,7 @@ begin
 end;
 
 {-----------------------------------------------------------------------------
-Carga el arbol binario odenado con los datos de la lista C)---}
+Carga el arbol binario odenado con los datos de la lista }
 procedure CargarArbolConLista(var a:arbol; l:lista);
 begin
  while(l <> nil) do
@@ -153,105 +153,72 @@ begin
    end;
 end;
 
-{--Actividad 3--}
-
 {----------------------------------------------------------------------------
-Izquierda -> Raiz -> Derecha}
-procedure EnOrden(a: arbol);
-begin
- if(a <> nil) then
-   begin
-     EnOrden(a^.HI);
-     write(a^.dato,' - ');
-     EnOrden(a^.HD);
-   end;
-end;
-
-{----------------------------------------------------------------------------
-Raiz -> Izquierda -> Derecha}
+Raiz -> Izquierda -> Derecha (PreOrden) }
 procedure PreOrden(a: arbol);
 begin
+  if (a <> nil) then
+    begin
+      write(a^.dato, ' - ');
+      PreOrden(a^.HI);
+      PreOrden(a^.HD);
+    end;
+end;
+
+{----------------------------------------------------------------------------
+Izquierda -> Raiz -> Derecha (enOrden)}
+procedure InOrden(a: arbol);
+begin
  if(a <> nil) then
    begin
+     InOrden(a^.HI);
      write(a^.dato,' - ');
-     PreOrden(a^.HI);
-     PreOrden(a^.HD);
+     InOrden(a^.HD);
    end;
 end;
 
 {----------------------------------------------------------------------------
-Izquierda -> Derecha -> Raiz}
-
-procedure PostOrden(a: arbol);
+ Izquierda -> Derecha -> Raiz  (PostOrden)}
+Procedure PostOrden(a: arbol);
 begin
  if(a <> nil) then
    begin
-    PostOrden(a^.HI);
-    PostOrden(a^.HD);
-    write(a^.dato,' - ');
+     PostOrden(a^.HI);
+     PostOrden(a^.HD);
+     write(a^.dato,' - ');
    end;
-end;
-
-{-- Actividad 4 --}
-
-{----------------------------------------------------------------------------
-Modulo Buscar - Devuelve un puntero }
-
-function Buscar(a: arbol; d:integer):arbol;
-begin
- if(a = nil) or (a^.dato = d) then
-   Buscar:=a
- else
-   if(a^.dato > d) then
-     Buscar:=Buscar(a^.HI,d)
- else
-   if(a^.dato < d) then
-     Buscar:=Buscar(a^.HD,d);
 end;
 
 Var
  a: arbol;
  l: lista;
- d:integer;
 
 begin
- Randomize;
+  Randomize;
 
- a:=nil;
+  a:= nil;
+  crearLista(l);
+  writeln('Lista generada: ');
+  imprimirLista(l);
+  writeln; writeln;
 
- crearLista(l);
- writeln ('Lista generada: ');
- imprimirLista(l);
- writeln('');
- writeln('');
+  CargarArbolConLista(a, l);
 
- CargarArbolConLista(a,l);
- imprimirpornivel(a);
+  writeln('Impresion por niveles:');
+  imprimirpornivel(a);
+  writeln;
 
- writeln('PreOrden ');
- PreOrden(a);
+  writeln('Recorrido PreOrden:');
+  PreOrden(a);
+  writeln; writeln;
 
- writeln('');
+  writeln('Recorrido InOrden:');
+  InOrden(a);
+  writeln; writeln;
 
- writeln('EnOrden ');
- EnOrden(a);
+  writeln('Recorrido PostOrden:');
+  PostOrden(a);
+  writeln;
 
- writeln('');
-
- writeln('PostOrden ');
- PostOrden(a);
-
- writeln('');
-
- write('Dato a buscar: ');
- readln(d);
-
- if(Buscar(a,d) = nil) then
-   writeln('NIL - No se encontro')
- else
-   writeln('Se encontro: ',d);
-
-
- readln;
-
+  readln;
 end.

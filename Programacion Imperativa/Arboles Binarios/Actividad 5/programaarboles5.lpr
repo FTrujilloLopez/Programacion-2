@@ -1,4 +1,4 @@
-Program programaarboles4;
+Program programaarboles5;
 Type
 
   // Lista de enteros
@@ -209,6 +209,33 @@ begin
      Buscar:=Buscar(a^.HD,d);
 end;
 
+{-- Actividad 5 --}
+{----------------------------------------------------------------------------
+Valor minimo del arbol a) }
+function VerMin(a: arbol):integer;
+begin
+ if(a = nil) then
+   VerMin:= -1
+ else
+   if(a^.HI = nil) then
+     VerMin:=a^.dato
+ else
+   VerMin:=VerMin(a^.HI);
+end;
+
+{----------------------------------------------------------------------------
+Valor maximo del arbol B) }
+function VerMax(a: arbol):integer;
+begin
+ if(a = nil) then
+   VerMax:= -1
+ else
+   if(a^.HD = nil) then
+     VerMax:=a^.dato
+ else
+   VerMax:=VerMax(a^.HD);
+end;
+
 Var
  a: arbol;
  l: lista;
@@ -232,25 +259,40 @@ begin
  PreOrden(a);
 
  writeln('');
+ writeln('');
 
  writeln('EnOrden ');
  EnOrden(a);
 
+ writeln('');
  writeln('');
 
  writeln('PostOrden ');
  PostOrden(a);
 
  writeln('');
+ writeln('');
 
  write('Dato a buscar: ');
  readln(d);
+
+ writeln('');
+ writeln('');
 
  if(Buscar(a,d) = nil) then
    writeln('NIL - No se encontro')
  else
    writeln('Se encontro: ',d);
 
+ writeln('');
+ writeln('');
+
+ writeln('Minimo valor del arbol: ',verMin(a));
+
+ writeln('');
+ writeln('');
+
+ writeln('Maximo valor del arbol: ',verMax(a));
 
  readln;
 

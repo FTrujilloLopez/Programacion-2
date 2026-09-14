@@ -1,4 +1,4 @@
-Program programaarboles4;
+Program programaborrarenarbol;
 Type
 
   // Lista de enteros
@@ -153,66 +153,71 @@ begin
    end;
 end;
 
-{--Actividad 3--}
+
+
 
 {----------------------------------------------------------------------------
-Izquierda -> Raiz -> Derecha}
-procedure EnOrden(a: arbol);
+Obtener valor minimo - Modulo auxiliar para borrar }
+function ObtenerMinimo(a:arbol):integer;
 begin
- if(a <> nil) then
-   begin
-     EnOrden(a^.HI);
-     write(a^.dato,' - ');
-     EnOrden(a^.HD);
-   end;
-end;
-
-{----------------------------------------------------------------------------
-Raiz -> Izquierda -> Derecha}
-procedure PreOrden(a: arbol);
-begin
- if(a <> nil) then
-   begin
-     write(a^.dato,' - ');
-     PreOrden(a^.HI);
-     PreOrden(a^.HD);
-   end;
-end;
-
-{----------------------------------------------------------------------------
-Izquierda -> Derecha -> Raiz}
-
-procedure PostOrden(a: arbol);
-begin
- if(a <> nil) then
-   begin
-    PostOrden(a^.HI);
-    PostOrden(a^.HD);
-    write(a^.dato,' - ');
-   end;
-end;
-
-{-- Actividad 4 --}
-
-{----------------------------------------------------------------------------
-Modulo Buscar - Devuelve un puntero }
-
-function Buscar(a: arbol; d:integer):arbol;
-begin
- if(a = nil) or (a^.dato = d) then
-   Buscar:=a
+ if(a^.HI = nil) then
+   ObtenerMinimo:= a^.dato
  else
-   if(a^.dato > d) then
-     Buscar:=Buscar(a^.HI,d)
- else
-   if(a^.dato < d) then
-     Buscar:=Buscar(a^.HD,d);
+   ObtenerMinimo:=ObtenerMinimo(a^.HI);
 end;
 
-Var
- a: arbol;
+{-----------------------------------------------------------------------------
+Borrar elemento de arbol - Actividad 8 - A) }
+procedure borrarElemento(var a: arbol; d: integer ;var borrado:boolean);
+var
+   aux: arbol;
+   min: integer;
+begin
+ if(a = nil) then
+   borrado:=false
+ else
+   if(d < a^.dato) then
+     borrarElemento(a^.HI,d,borrado)
+ else
+   if(d > a^.dato) then
+     borrarElemento(a^.HD,d,borrado)
+ else
+   begin
+     borrado:=true;
+     if(a^.HD = nil) and (a^.HI = nil) then
+       begin
+         dispose(a);
+         a:= nil;
+       end
+     else
+       if(a^.HI = nil) then
+         begin
+           aux:=a;
+           a:=a^.HD;
+           dispose(aux);
+         end
+     else
+       if(a^.HD = nil) then
+         begin
+           aux:=a;
+           a:=a^.HI;
+           dispose(aux);
+         end
+     else
+       begin
+         min:= ObtenerMinimo(a^.HD);
+         a^.dato:= min;
+         borrarElemento(a^.HD,min,borrado);
+       end;
+   end;
+end;
+
+var
+
  l: lista;
+ a: arbol;
  d:integer;
+ borrado:boolean;
 
 begin
  Randomize;
@@ -222,36 +227,33 @@ begin
  crearLista(l);
  writeln ('Lista generada: ');
  imprimirLista(l);
+
  writeln('');
  writeln('');
 
  CargarArbolConLista(a,l);
  imprimirpornivel(a);
 
- writeln('PreOrden ');
- PreOrden(a);
-
+ writeln('');
  writeln('');
 
- writeln('EnOrden ');
- EnOrden(a);
-
- writeln('');
-
- writeln('PostOrden ');
- PostOrden(a);
-
- writeln('');
-
- write('Dato a buscar: ');
+ write('Ingresar dato a borrar: ');
  readln(d);
 
- if(Buscar(a,d) = nil) then
-   writeln('NIL - No se encontro')
- else
-   writeln('Se encontro: ',d);
+ borrarElemento(a,d,borrado);
 
+ writeln('');
+ writeln('');
+
+ if(borrado) then
+   writeln('Borrado exitosamente')
+ else
+   writeln('No se pudo borrar');
+
+ writeln('');
+ writeln('');
+
+ imprimirpornivel(a);
 
  readln;
-
 end.

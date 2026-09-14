@@ -1,4 +1,4 @@
-Program programaarboles4;
+Program programaarboles7;
 Type
 
   // Lista de enteros
@@ -209,10 +209,55 @@ begin
      Buscar:=Buscar(a^.HD,d);
 end;
 
+{-- Actividad 5 --}
+{----------------------------------------------------------------------------
+Valor minimo del arbol a) }
+function VerMin(a: arbol):integer;
+begin
+ if(a = nil) then
+   VerMin:= -1
+ else
+   if(a^.HI = nil) then
+     VerMin:=a^.dato
+ else
+   VerMin:=VerMin(a^.HI);
+end;
+
+{----------------------------------------------------------------------------
+Valor maximo del arbol B) }
+function VerMax(a: arbol):integer;
+begin
+ if(a = nil) then
+   VerMax:= -1
+ else
+   if(a^.HD = nil) then
+     VerMax:=a^.dato
+ else
+   VerMax:=VerMax(a^.HD);
+end;
+
+{----------------------------------------------------------------------------
+Busqueda Acotada - Actividad 7}
+procedure verValoresEnRango(a: arbol; min:integer; max:integer);
+begin
+    if (a <> nil) then
+    if (a^.dato >= min) then
+      if (a^.dato <= max) then begin
+        write(a^.dato,' - ');
+        verValoresEnRango(a^.HI, min, max);
+        verValoresEnRango(a^.HD, min, max);
+      end
+      else
+        verValoresEnRango(a^.HI, min, max)
+    else
+      verValoresEnRango(a^.HD, min, max);
+end;
+
+
 Var
  a: arbol;
  l: lista;
- d:integer;
+ d,min,max:integer;
 
 begin
  Randomize;
@@ -228,29 +273,53 @@ begin
  CargarArbolConLista(a,l);
  imprimirpornivel(a);
 
- writeln('PreOrden ');
- PreOrden(a);
+ {writeln('PreOrden ');
+ PreOrden(a);}
 
+ writeln('');
  writeln('');
 
  writeln('EnOrden ');
  EnOrden(a);
 
+ {writeln('');
  writeln('');
 
  writeln('PostOrden ');
- PostOrden(a);
+ PostOrden(a);}
 
  writeln('');
+ writeln('');
 
- write('Dato a buscar: ');
+ {write('Dato a buscar: ');
  readln(d);
+
+ writeln('');
+ writeln('');
 
  if(Buscar(a,d) = nil) then
    writeln('NIL - No se encontro')
  else
    writeln('Se encontro: ',d);
 
+ writeln('');
+ writeln('');
+
+ writeln('Minimo valor del arbol: ',verMin(a));
+
+ writeln('');
+ writeln('');
+
+ writeln('Maximo valor del arbol: ',verMax(a));  }
+
+ writeln('Ingresar el limite inferior: ');
+ readln(min);
+
+ writeln('Ingresar el limite superior: ');
+ readln(max);
+
+ writeln('Los valores que estan dentro del rango son: ');
+ verValoresEnRango(a,min,max);
 
  readln;
 
