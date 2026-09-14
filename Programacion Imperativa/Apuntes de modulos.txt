@@ -1,0 +1,423 @@
+{ ============================================================================ }
+{                  RESUMEN IMPERATIVO - TALLER DE PROGRAMACIÓN                 }
+{ ============================================================================ }
+
+{ ---------------------------------------------------------------------------- }
+{ 1. DEFINICIÓN DE TIPOS BASE                                                  }
+{ ---------------------------------------------------------------------------- }
+
+type
+  tipoDato = integer; { Adaptar al registro pedido en el parcial }
+
+  { Lista simple }
+  lista = ^nodoL;
+  nodoL = record
+    dato: tipoDato;
+    sig: lista;
+  end;
+
+  { Árbol binario con sublista (típica estructura compuesta) }
+  arbol = ^nodoA;
+  nodoA = record
+    dato: tipoDato;
+    HI: arbol;
+    HD: arbol;
+    subL: lista;
+  end;
+
+  { Vector para ordenación / búsqueda dicotómica }
+  vector = array [1..100] of tipoDato;
+
+  { Estructuras para Merge (ejemplo con 4 sucursales/estantes) }
+  const dimFMerge = 4;
+  type
+    vecListas = array [1..dimFMerge] of lista;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 2. MÓDULOS DE LISTAS                                                         }
+{ ---------------------------------------------------------------------------- }
+
+procedure agregarAdelante(var l: lista; d: tipoDato);
+var
+  nue: lista;
+begin
+  new(nue);
+  nue^.dato := d;
+  nue^.sig := l;
+  l := nue;
+end;
+
+procedure agregarAtras(var pri, ult: lista; d: tipoDato);
+var
+  nue: lista;
+begin
+  new(nue);
+  nue^.dato := d;
+  nue^.sig := nil;
+  if (pri = nil) then
+    pri := nue
+  else
+    ult^.sig := nue;
+  ult := nue;
+end;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 3. RECURSIÓN BÁSICA Y VECTORES                                               }
+{ ---------------------------------------------------------------------------- }
+
+{ Búsqueda dicotómica recursiva (el vector debe estar previamente ordenado) }
+function busquedaDicotomica(var vec: vector; pri: integer; ult: integer; dato: integer): boolean;
+var
+  medio: integer;
+begin
+  if (pri > ult) then
+    busquedaDicotomica := false
+  else
+  begin
+    medio := (pri + ult) div 2;
+    if (dato = vec[medio]) then
+      busquedaDicotomica := true
+    else if (dato > vec[medio]) then
+      busquedaDicotomica := busquedaDicotomica(vec, medio + 1, ult, dato)
+    else
+      busquedaDicotomica := busquedaDicotomica(vec, pri, medio - 1, dato);
+  end;
+end;
+
+{ Dígito máximo de un número entero }
+function digitoMaximo(n: integer): integer;
+var
+  dig, max: integer;
+begin
+  if ((n div 10) = 0) then
+    digitoMaximo := n
+  else
+  begin
+    dig := (n mod 10);
+    max := digitoMaximo(n div 10);
+    if (dig > max) then
+      digitoMaximo := dig
+    else
+      digitoMaximo := max;
+  end;
+end;
+
+{ Elemento máximo de un vector de forma recursiva }
+function maximoVector(var vec: vector; dimL: integer): integer;
+var
+  max: integer;
+begin
+  if (dimL = 1) then
+    maximoVector := vec[dimL]
+  else
+  begin
+    max := maximoVector(vec, dimL - 1);
+    if (vec[dimL] > max) then
+      maximoVector := vec[dimL]
+    else
+      maximoVector := max;
+  end;
+end;
+
+{ Suma recursiva de los elementos de un vector }
+function sumaVector(var vec: vector; dimL: integer): integer;
+begin
+  if (dimL = 0) then
+    sumaVector := 0
+  else
+    sumaVector := sumaVector(vec, dimL - 1) + vec[dimL];
+end;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 4. ALGORITMOS DE ORDENACIÓN DE VECTORES                                      }
+{ ---------------------------------------------------------------------------- }
+
+procedure ordenacionPorInsercion(var v: vector; dimL: integer);
+var
+  i, j: integer;
+  actual: tipoDato;
+begin
+  for i := 2 to dimL do
+  begin
+    actual := v[i];
+    j := i - 1;
+    while (j > 0) and (v[j] > actual) do
+    begin
+      v[j + 1] := v[j];
+      j := j - 1;
+    end;
+    v[j + 1] := actual;
+  end;
+end;
+
+procedure ordenacionPorSeleccion(var v: vector; dimL: integer);
+var
+  i, j, posMin: integer;
+  item: tipoDato;
+begin
+  for i := 1 to dimL - 1 do
+  begin
+    posMin := i;
+    for j := i + 1 to dimL do
+      if (v[j] < v[posMin]) then
+        posMin := j;
+    item := v[posMin];
+    v[posMin] := v[i];
+    v[i] := item;
+  end;
+end;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 5. ÁRBOLES BINARIOS DE BÚSQUEDA (ABB)                                         }
+{ ---------------------------------------------------------------------------- }
+
+{ Inserción simple (sin repetidos) }
+procedure insertarArbol(var a: arbol; dato: tipoDato);
+begin
+  if (a = nil) then
+  begin
+    new(a);
+    a^.dato := dato;
+    a^.HI := nil;
+    a^.HD := nil;
+    a^.subL := nil;
+  end
+  else if (dato < a^.dato) then
+    insertarArbol(a^.HI, dato)
+  else if (dato > a^.dato) then
+    insertarArbol(a^.HD, dato);
+end;
+
+{ Inserción con repetición acumulando en sublista }
+procedure insertarConSublista(var a: arbol; dato: tipoDato);
+begin
+  if (a = nil) then
+  begin
+    new(a);
+    a^.dato := dato;
+    a^.HI := nil;
+    a^.HD := nil;
+    a^.subL := nil;
+    agregarAdelante(a^.subL, dato);
+  end
+  else if (dato < a^.dato) then
+    insertarConSublista(a^.HI, dato)
+  else if (dato > a^.dato) then
+    insertarConSublista(a^.HD, dato)
+  else
+    agregarAdelante(a^.subL, dato); { Clave repetida: va a la sublista }
+end;
+
+{ Búsqueda de un nodo por clave }
+function buscarEnArbol(a: arbol; dato: tipoDato): arbol;
+begin
+  if (a = nil) then
+    buscarEnArbol := nil
+  else if (dato = a^.dato) then
+    buscarEnArbol := a
+  else if (dato < a^.dato) then
+    buscarEnArbol := buscarEnArbol(a^.HI, dato)
+  else
+    buscarEnArbol := buscarEnArbol(a^.HD, dato);
+end;
+
+{ Mínimo elemento del árbol con caso base nil controlado }
+function buscarMin(a: arbol): integer;
+begin
+  if (a = nil) then
+    buscarMin := -1 { Valor centinela si el árbol está vacío }
+  else if (a^.HI = nil) then
+    buscarMin := a^.dato
+  else
+    buscarMin := buscarMin(a^.HI);
+end;
+
+{ Máximo elemento del árbol }
+function buscarMax(a: arbol): integer;
+begin
+  if (a = nil) then
+    buscarMax := -1
+  else if (a^.HD = nil) then
+    buscarMax := a^.dato
+  else
+    buscarMax := buscarMax(a^.HD);
+end;
+
+{ Búsqueda acotada / Filtrado por rango [inf, sup] }
+procedure verValoresEnRango(a: arbol; inf: integer; sup: integer);
+begin
+  if (a <> nil) then
+  begin
+    if (a^.dato >= inf) then
+    begin
+      if (a^.dato <= sup) then
+      begin
+        write(a^.dato, ' ');
+        verValoresEnRango(a^.HI, inf, sup);
+        verValoresEnRango(a^.HD, inf, sup);
+      end
+      else
+        verValoresEnRango(a^.HI, inf, sup);
+    end
+    else
+      verValoresEnRango(a^.HD, inf, sup);
+  end;
+end;
+
+{ Borrado de un nodo en el ABB (resultado por referencia corregido) }
+procedure borrarElemento(var a: arbol; dato: integer; var resultado: boolean);
+var
+  aux: arbol;
+  min: integer;
+begin
+  if (a = nil) then
+    resultado := false
+  else if (dato < a^.dato) then
+    borrarElemento(a^.HI, dato, resultado)
+  else if (dato > a^.dato) then
+    borrarElemento(a^.HD, dato, resultado)
+  else
+  begin
+    resultado := true;
+    if (a^.HI = nil) then
+    begin
+      aux := a;
+      a := a^.HD;
+      dispose(aux);
+    end
+    else if (a^.HD = nil) then
+    begin
+      aux := a;
+      a := a^.HI;
+      dispose(aux);
+    end
+    else
+    begin
+      min := buscarMin(a^.HD);
+      a^.dato := min;
+      borrarElemento(a^.HD, min, resultado);
+    end;
+  end;
+end;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 6. RECORRIDOS DE ÁRBOLES                                                     }
+{ ---------------------------------------------------------------------------- }
+
+procedure preOrden(a: arbol);
+begin
+  if (a <> nil) then
+  begin
+    write(a^.dato, ' ');
+    preOrden(a^.HI);
+    preOrden(a^.HD);
+  end;
+end;
+
+procedure enOrden(a: arbol);
+begin
+  if (a <> nil) then
+  begin
+    enOrden(a^.HI);
+    write(a^.dato, ' ');
+    enOrden(a^.HD);
+  end;
+end;
+
+{ PostOrden corregido: HI -> HD -> Raíz }
+procedure postOrden(a: arbol);
+begin
+  if (a <> nil) then
+  begin
+    postOrden(a^.HI);
+    postOrden(a^.HD);
+    write(a^.dato, ' ');
+  end;
+end;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 7. CÁLCULOS TÍPICOS DE EXAMEN SOBRE ÁRBOLES                                   }
+{ ---------------------------------------------------------------------------- }
+
+function cantidadNodos(a: arbol): integer;
+begin
+  if (a = nil) then
+    cantidadNodos := 0
+  else
+    cantidadNodos := 1 + cantidadNodos(a^.HI) + cantidadNodos(a^.HD);
+end;
+
+function sumarArbol(a: arbol): integer;
+begin
+  if (a = nil) then
+    sumarArbol := 0
+  else
+    sumarArbol := a^.dato + sumarArbol(a^.HI) + sumarArbol(a^.HD);
+end;
+
+
+{ ---------------------------------------------------------------------------- }
+{ 8. MERGE Y MERGE ACUMULADOR (VECTOR DE LISTAS -> NUEVA LISTA)                }
+{ ---------------------------------------------------------------------------- }
+
+{ Determina el elemento mínimo entre las cabezas de las listas }
+procedure determinarMinimo(var v: vecListas; var min: tipoDato);
+var
+  i, posMin: integer;
+begin
+  min := 9999; { Centinela de valor alto }
+  posMin := -1;
+  for i := 1 to dimFMerge do
+  begin
+    if (v[i] <> nil) and (v[i]^.dato < min) then
+    begin
+      min := v[i]^.dato;
+      posMin := i;
+    end;
+  end;
+  if (posMin <> -1) then
+    v[posMin] := v[posMin]^.sig; { Avanza en la lista seleccionada }
+end;
+
+{ Merge básico: vuelca todos los elementos ordenados a una nueva lista }
+procedure mergeTotal(var v: vecListas; var lNueva: lista);
+var
+  min: tipoDato;
+  ult: lista;
+begin
+  lNueva := nil;
+  determinarMinimo(v, min);
+  while (min <> 9999) do
+  begin
+    agregarAtras(lNueva, ult, min);
+    determinarMinimo(v, min);
+  end;
+end;
+
+{ Merge con Acumulador: agrupa por clave repetida sumando o condensando }
+procedure mergeAcumulador(var v: vecListas; var lNueva: lista);
+var
+  min, actual: tipoDato;
+  ult: lista;
+  cantTotal: integer;
+begin
+  lNueva := nil;
+  determinarMinimo(v, min);
+  while (min <> 9999) do
+  begin
+    actual := min;
+    cantTotal := 0;
+    while (min <> 9999) and (min = actual) do
+    begin
+      cantTotal := cantTotal + 1; { O sumar cantidad/monto según el ejercicio }
+      determinarMinimo(v, min);
+    end;
+    agregarAtras(lNueva, ult, actual);
+  end;
+end;
