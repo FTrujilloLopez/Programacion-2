@@ -1,0 +1,8 @@
+#BlueJ class context
+#Mon Oct 12 13:08:57 ART 2026
+comment0.target=Grupo
+comment1.target=Grupo()
+comment2.target=void almacenarPersonas()
+comment3.target=int getCantidadPersonas65()
+comment4.target=Persona getObtenerPersonaDni()
+numComments=5
