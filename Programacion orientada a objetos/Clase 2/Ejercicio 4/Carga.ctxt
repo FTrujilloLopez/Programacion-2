@@ -1,0 +1,9 @@
+#BlueJ class context
+#Wed Oct 14 10:20:15 ART 2026
+comment0.target=Carga
+comment1.target=Carga()
+comment2.target=void setAlmacenarPartidos()
+comment3.target=int getGanoRiver()
+comment4.target=int getGolesBoca()
+comment5.target=double getPorcentajeEmpate()
+numComments=6

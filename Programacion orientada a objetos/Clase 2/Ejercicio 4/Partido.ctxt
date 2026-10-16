@@ -1,0 +1,22 @@
+#BlueJ class context
+#Wed Oct 14 10:20:15 ART 2026
+comment0.target=Partido
+comment1.target=Partido()
+comment10.params=unosGoles
+comment10.target=void setGolesVisitante(int)
+comment11.target=boolean hayGanador()
+comment12.target=boolean hayEmpate()
+comment13.target=java.lang.String getGanador()
+comment2.params=unLocal unVisitante unGolLocal unGolVisitante
+comment2.target=Partido(java.lang.String, java.lang.String, int, int)
+comment3.target=java.lang.String getLocal()
+comment4.target=java.lang.String getVisitante()
+comment5.target=int getGolesLocal()
+comment6.target=int getGolesVisitante()
+comment7.params=unEquipo
+comment7.target=void setLocal(java.lang.String)
+comment8.params=unEquipo
+comment8.target=void setVisitante(java.lang.String)
+comment9.params=unosGoles
+comment9.target=void setGolesLocal(int)
+numComments=14
