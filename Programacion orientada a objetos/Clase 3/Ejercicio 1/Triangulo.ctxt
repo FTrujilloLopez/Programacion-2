@@ -1,5 +1,5 @@
 #BlueJ class context
-#Fri Oct 16 16:41:09 ART 2026
+#Mon Oct 19 09:41:39 ART 2026
 comment0.target=Triangulo
 comment1.params=l1 l2 l3 cRelleno cLinea
 comment1.target=Triangulo(double, double, double, java.lang.String, java.lang.String)
