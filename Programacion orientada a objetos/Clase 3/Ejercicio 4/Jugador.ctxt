@@ -1,0 +1,23 @@
+#BlueJ class context
+#Sun Oct 18 03:58:45 ART 2026
+comment0.target=Jugador
+comment1.params=unNombre unDNI unaEdad _partidos _goles
+comment1.target=Jugador(java.lang.String, int, int, int, int)
+comment10.params=unDNI
+comment10.target=void setDNI(int)
+comment11.params=unaEdad
+comment11.target=void setEdad(int)
+comment12.params=unNombre
+comment12.target=void setNombre(java.lang.String)
+comment13.target=java.lang.String toString()
+comment2.target=Jugador()
+comment3.target=int getDNI()
+comment4.target=int getEdad()
+comment5.target=java.lang.String getNombre()
+comment6.target=int getNumeroDePartidos()
+comment7.target=int getNumeroDeGoles()
+comment8.params=_partidos
+comment8.target=void setNumeroDePartidos(int)
+comment9.params=_goles
+comment9.target=void setNumeroDeGoles(int)
+numComments=14

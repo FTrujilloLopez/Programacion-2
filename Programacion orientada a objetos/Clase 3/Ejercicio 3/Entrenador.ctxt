@@ -1,0 +1,18 @@
+#BlueJ class context
+#Sun Oct 18 00:16:54 ART 2026
+comment0.target=Entrenador
+comment1.params=nombre sueldo campeonatos
+comment1.target=Entrenador(java.lang.String, double, int)
+comment10.target=java.lang.String toString()
+comment2.target=Entrenador()
+comment3.target=java.lang.String getNombre()
+comment4.target=double getSueldo()
+comment5.target=int getCampeonatos()
+comment6.params=nombre
+comment6.target=void setNombre(java.lang.String)
+comment7.params=sueldo
+comment7.target=void setSueldo(double)
+comment8.params=campeonatos
+comment8.target=void setCampeonatos(int)
+comment9.target=double calcularSueldoACobrar()
+numComments=11

@@ -1,46 +1,36 @@
-import java.util.Scanner;
-public class Carga
-{
+public class Carga {
     private Partido[] vector;
+    private int dimensionLogica; // Para llevar la cuenta de cuántos partidos cargaste
 
-    public Carga()
-    {
-       vector = new Partido[325];
+    public Carga(int dimension) {
+        vector = new Partido[dimension];
+        dimensionLogica = 0;
     }
 
-    public void setAlmacenarPartidos(){
-        Scanner in = new Scanner(System.in);
-       for(int i = 0; i < 325; i++){
-         vector[i] = new Partido();
-         
-         System.out.print("Local: ");
-         vector[i].setLocal(in.nextLine());
-         System.out.print("Visitante: ");
-         vector[i].setVisitante(in.nextLine());
-         
-         System.out.print("Goles Local: ");
-         vector[i].setGolesLocal(in.nextInt());
-         System.out.print("Goles Visitante: ");
-         vector[i].setGolesVisitante(in.nextInt());
-         
-         in.nextLine();
-       }
+    // Método para agregar un partido (los datos ya vienen leídos desde el main)
+    public void agregarPartido(Partido unPartido) {
+        if (dimensionLogica < vector.length) {
+            vector[dimensionLogica] = unPartido;
+            dimensionLogica++;
+        }
     }
-    
-    public int getGanoRiver(){ 
+
+    // Tus otros métodos (getGanoRiver, getGolesBoca, getPorcentajeEmpate) 
+    // recorren hasta dimensionLogica en lugar de 325 fijo, o usan vector.length
+    public int getGanoRiver() {
         int partidosGanadosRiver = 0;
-        for(int i = 0; i < 325; i++){
-            if((vector[i].getLocal() == "River") && (vector[i].getGolesLocal() > vector[i].getGolesVisitante())){
-              partidosGanadosRiver++;
+        for(int i = 0; i < dimensionLogica; i++){
+            if(vector[i].getLocal().equals("River") && vector[i].getGolesLocal() > vector[i].getGolesVisitante()){
+                partidosGanadosRiver++;
             }
         }
         return partidosGanadosRiver;
     }
-    
+
     public int getGolesBoca(){
         int golesBoca = 0;
-        for(int i = 0;i < 325;i++){
-            if(vector[i].getLocal() == "Boca"){
+        for(int i = 0; i < dimensionLogica; i++){
+            if(vector[i].getLocal().equals("Boca")){
                 golesBoca += vector[i].getGolesLocal();
             }
         }
@@ -49,14 +39,12 @@ public class Carga
     
     public double getPorcentajeEmpate(){
         int cantEmpate = 0;
-        double porcentajeEmpate = 0;
-        for(int i = 0;i < 325; i++){
+        if (dimensionLogica == 0) return 0;
+        for(int i = 0; i < dimensionLogica; i++){
             if(vector[i].getGolesLocal() == vector[i].getGolesVisitante()){
                 cantEmpate++;
             }
         }
-        porcentajeEmpate = (cantEmpate/325)*100;
-        return porcentajeEmpate;
+        return ((double) cantEmpate / dimensionLogica) * 100;
     }
 }
- 

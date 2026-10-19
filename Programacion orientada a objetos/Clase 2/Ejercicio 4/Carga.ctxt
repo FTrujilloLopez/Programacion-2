@@ -1,8 +1,10 @@
 #BlueJ class context
-#Wed Oct 14 10:20:15 ART 2026
+#Fri Oct 16 00:55:41 ART 2026
 comment0.target=Carga
-comment1.target=Carga()
-comment2.target=void setAlmacenarPartidos()
+comment1.params=dimension
+comment1.target=Carga(int)
+comment2.params=unPartido
+comment2.target=void agregarPartido(Partido)
 comment3.target=int getGanoRiver()
 comment4.target=int getGolesBoca()
 comment5.target=double getPorcentajeEmpate()

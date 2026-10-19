@@ -1,0 +1,9 @@
+#BlueJ class context
+#Fri Oct 16 19:01:04 ART 2026
+comment0.target=BalanzaComercial
+comment1.target=BalanzaComercial()
+comment2.params=pesoKg precioKg
+comment2.target=void registrarProducto(double, double)
+comment3.target=double montoAPagar()
+comment4.target=java.lang.String resumenDeCompra()
+numComments=5
