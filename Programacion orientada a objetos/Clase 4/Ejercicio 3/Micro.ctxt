@@ -1,0 +1,22 @@
+#BlueJ class context
+#Mon Oct 19 12:44:19 ART 2026
+comment0.target=Micro
+comment1.target=Micro()
+comment10.params=patente
+comment10.target=void setPatente(java.lang.String)
+comment11.params=horaSalida
+comment11.target=void setHoraSalida(java.lang.String)
+comment12.params=destino
+comment12.target=void setDestino(java.lang.String)
+comment2.params=patente destino horaSalida
+comment2.target=Micro(java.lang.String, java.lang.String, java.lang.String)
+comment3.target=java.lang.String getPatente()
+comment4.target=java.lang.String getDestino()
+comment5.target=java.lang.String getHoraSalida()
+comment6.target=int getAsientosO()
+comment7.target=boolean microLleno()
+comment8.params=asiento
+comment8.target=boolean validarAsiento(int)
+comment9.params=asiento
+comment9.target=java.lang.String estadoAsiento(int)
+numComments=13
