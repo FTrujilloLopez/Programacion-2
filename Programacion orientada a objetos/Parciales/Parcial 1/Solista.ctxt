@@ -1,0 +1,7 @@
+#BlueJ class context
+#Wed Oct 21 01:32:05 ART 2026
+comment0.target=Solista
+comment1.params=codigo fecha campo cantLocalidades precioInicial productora cantCanciones
+comment1.target=Solista(java.lang.String, java.lang.String, boolean, int, double, Productora, int)
+comment2.target=double calcularGanancia()
+numComments=3

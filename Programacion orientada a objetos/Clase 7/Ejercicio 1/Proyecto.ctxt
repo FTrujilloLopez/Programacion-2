@@ -1,0 +1,12 @@
+#BlueJ class context
+#Tue Oct 20 20:30:58 ART 2026
+comment0.target=Proyecto
+comment1.params=nombre codigo nombreDirector
+comment1.target=Proyecto(java.lang.String, java.lang.String, java.lang.String)
+comment2.params=unInvestigador
+comment2.target=void agregarInvestigador(Investigador)
+comment3.target=double dineroTotalOtorgado()
+comment4.params=nombre_completo
+comment4.target=void otorgarTodos(java.lang.String)
+comment5.target=java.lang.String toString()
+numComments=6

@@ -1,0 +1,11 @@
+#BlueJ class context
+#Wed Oct 21 03:00:15 ART 2026
+comment0.target=ElementoSimple
+comment1.params=nombre detalle cantidad estado
+comment1.target=ElementoSimple(java.lang.String, java.lang.String, int, boolean)
+comment2.target=java.lang.String getNombre()
+comment3.target=java.lang.String getDetalle()
+comment4.target=int getCantidad()
+comment5.target=boolean isEstado()
+comment6.target=java.lang.String toString()
+numComments=7

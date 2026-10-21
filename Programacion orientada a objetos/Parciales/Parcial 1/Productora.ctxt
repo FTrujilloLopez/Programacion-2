@@ -1,0 +1,6 @@
+#BlueJ class context
+#Tue Oct 20 23:03:45 ART 2026
+comment0.target=Productora
+comment1.params=nombre cantSponsor extranjera
+comment1.target=Productora(java.lang.String, int, boolean)
+numComments=2

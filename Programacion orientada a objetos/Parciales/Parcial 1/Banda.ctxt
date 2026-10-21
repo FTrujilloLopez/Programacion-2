@@ -1,0 +1,7 @@
+#BlueJ class context
+#Wed Oct 21 01:31:19 ART 2026
+comment0.target=Banda
+comment1.params=codigo fecha campo cantLocalidades precioInicial productora nombre
+comment1.target=Banda(java.lang.String, java.lang.String, boolean, int, double, Productora, java.lang.String)
+comment2.target=double calcularGanancia()
+numComments=3

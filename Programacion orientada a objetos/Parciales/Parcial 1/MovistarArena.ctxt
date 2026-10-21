@@ -1,0 +1,8 @@
+#BlueJ class context
+#Wed Oct 21 01:42:12 ART 2026
+comment0.target=MovistarArena
+comment1.target=MovistarArena()
+comment2.params=espectaculo
+comment2.target=void agregarEspectaculo(Espectaculo)
+comment3.target=double calcularPromedioGancia()
+numComments=4

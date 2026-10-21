@@ -1,0 +1,13 @@
+#BlueJ class context
+#Wed Oct 21 01:34:06 ART 2026
+comment0.target=Espectaculo
+comment1.params=codigo fecha campo cantLocalidades precioInicial productora
+comment1.target=Espectaculo(java.lang.String, java.lang.String, boolean, int, double, Productora)
+comment2.target=boolean getCampo()
+comment3.target=int getCantLocalidades()
+comment4.params=cantLocalidades
+comment4.target=void setCantLocalidades(int)
+comment5.target=double getPrecioInicial()
+comment6.target=double calcularGanancia()
+comment7.target=boolean esFechaEspecial()
+numComments=8

@@ -2,9 +2,9 @@
 dependency1.from=Main
 dependency1.to=Jugador
 dependency1.type=UsesDependency
-editor.fx.0.height=1110
-editor.fx.0.width=1036
-editor.fx.0.x=1017
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
 editor.fx.0.y=0
 objectbench.height=92
 objectbench.width=760

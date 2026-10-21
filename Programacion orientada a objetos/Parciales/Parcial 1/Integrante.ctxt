@@ -1,0 +1,6 @@
+#BlueJ class context
+#Tue Oct 20 23:39:15 ART 2026
+comment0.target=Integrante
+comment1.params=nombre rol
+comment1.target=Integrante(java.lang.String, java.lang.String)
+numComments=2

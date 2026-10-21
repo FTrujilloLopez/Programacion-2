@@ -1,0 +1,13 @@
+#BlueJ class context
+#Tue Oct 20 20:30:58 ART 2026
+comment0.target=Investigador
+comment1.params=nombre categoria especialidad
+comment1.target=Investigador(java.lang.String, int, java.lang.String)
+comment2.target=java.lang.String getNombre()
+comment3.target=int getCategoria()
+comment4.target=java.lang.String getEspecialidad()
+comment5.params=unSubsidio
+comment5.target=void agregarSubsidio(Subsidio)
+comment6.target=double dineroOtorgado()
+comment7.target=void otorgarTodosLosSubsidios()
+numComments=8
