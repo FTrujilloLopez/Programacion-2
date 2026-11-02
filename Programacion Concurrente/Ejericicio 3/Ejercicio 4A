@@ -1,0 +1,31 @@
+programa Ejercicio4A
+procesos
+  proceso rectangulo(E alto:numero; E ancho:numero)
+  comenzar
+    repetir 2
+      repetir alto
+        mover
+      derecha
+      repetir ancho
+        mover 
+      derecha
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables 
+    ancho:numero
+  comenzar
+    ancho:=5
+    repetir 3
+      rectangulo(1,ancho)
+      Pos(PosAv + 1,PosCa + 2)
+      ancho:= ancho - 2   
+  fin
+variables
+  R_info: robot1
+comenzar
+  AsignarArea(R_info, ciudad)
+  Iniciar(R_info, 1,1)
+fin
