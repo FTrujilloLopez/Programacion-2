@@ -1,0 +1,36 @@
+programa Ejercicio 3
+procesos
+  proceso escalera(E numAv: numero;E numCalle:numero)
+  variables
+    ancho:numero
+    alto:numero
+  comenzar
+    ancho:=1
+    alto:=1
+    repetir 4
+      repetir alto
+        mover
+      derecha
+      repetir ancho
+        mover
+      repetir 3
+        derecha
+      ancho:=ancho + 1
+      alto:=alto + 1
+    Pos(numAv, numCalle)
+     
+      mover
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  comenzar
+    recorrerAvenida(1)
+  fin
+variables
+  R_info: robot1
+comenzar
+  AsignarArea(R_info, ciudad)
+  Iniciar(R_info, 1,1)
+fin

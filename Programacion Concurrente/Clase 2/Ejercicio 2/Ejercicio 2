@@ -45,13 +45,21 @@ variables
   R4: robot4
 comenzar
   AsignarArea(R1, ciudad1)
-  AsignarArea(R2, ciudad2)
-  AsignarArea(R3, ciudad3)
-  AsignarArea(R4, ciudad4)
   AsignarArea(R1, ciudad5)
+  AsignarArea(R1, ciudad2)
+  
+  AsignarArea(R2, ciudad2)
   AsignarArea(R2, ciudad6)
+  AsignarArea(R2, ciudad3)
+  
+  AsignarArea(R3, ciudad3)
   AsignarArea(R3, ciudad7)
+  AsignarArea(R3, ciudad4)
+  
+  AsignarArea(R4, ciudad4)
   AsignarArea(R4, ciudad8)
+  AsignarArea(R4, ciudad1)
+  
   Iniciar(R1, 10,10)
   Iniciar(R2, 10,30)
   Iniciar(R3, 30,30)
