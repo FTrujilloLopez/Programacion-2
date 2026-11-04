@@ -1,0 +1,57 @@
+programa Ejercicio2 
+procesos
+  proceso recorrer
+  comenzar
+    repetir 20
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+      mover
+  fin
+areas
+  ciudad1: AreaPC (10,10,10,10)
+  ciudad2: AreaPC (10,20,10,20)
+  ciudad3: AreaPC (20,20,20,20)
+  ciudad4: AreaPC (20,10,20,10)
+  ciudad5: AreaP (10,11,10,19)
+  ciudad6: AreaP (11,20,19,20)
+  ciudad7: AreaP (20,11,20,19)
+  ciudad8: AreaP (11,10,19,10)
+robots
+  robot robot1
+  comenzar
+   recorrer
+  fin
+  robot robot2
+  comenzar 
+    derecha
+    recorrer
+  fin
+  robot robot3
+  comenzar
+  repetir 2
+    derecha
+  recorrer
+  robot robot4
+  comenzar
+    recorrerAvenida(1)
+  fin
+variables
+  R2: robot1
+  R1: robot2
+  R3: robot3
+  R4: robot4
+comenzar
+  AsignarArea(R1, ciudad1)
+  AsignarArea(R2, ciudad2)
+  AsignarArea(R3, ciudad3)
+  AsignarArea(R4, ciudad4)
+  AsignarArea(R1, ciudad5)
+  AsignarArea(R2, ciudad6)
+  AsignarArea(R3, ciudad7)
+  AsignarArea(R4, ciudad8)
+  Iniciar(R1, 10,10)
+  Iniciar(R1, 10,20)
+  Iniciar(R1, 20,20)
+  Iniciar(R1, 20,10)
+  
+fin
