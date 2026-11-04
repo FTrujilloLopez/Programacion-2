@@ -9,17 +9,17 @@ procesos
   fin
 areas
   ciudad1: AreaPC (10,10,10,10)
-  ciudad2: AreaPC (10,20,10,20)
-  ciudad3: AreaPC (20,20,20,20)
-  ciudad4: AreaPC (20,10,20,10)
-  ciudad5: AreaP (10,11,10,19)
-  ciudad6: AreaP (11,20,19,20)
-  ciudad7: AreaP (20,11,20,19)
-  ciudad8: AreaP (11,10,19,10)
+  ciudad2: AreaPC (10, 30, 10, 30)
+  ciudad3: AreaPC (30, 30, 30, 30)
+  ciudad4: AreaPC (30, 10, 30, 10)
+  ciudad5: AreaP (10, 11, 10, 29)
+  ciudad6: AreaP (11, 30, 29, 30)
+  ciudad7: AreaP (30, 11, 30, 29)
+  ciudad8: AreaP (11, 10, 29, 10)
 robots
   robot robot1
   comenzar
-   recorrer
+    recorrer
   fin
   robot robot2
   comenzar 
@@ -28,16 +28,19 @@ robots
   fin
   robot robot3
   comenzar
-  repetir 2
-    derecha
-  recorrer
+    repetir 2
+      derecha
+    recorrer
+  fin
   robot robot4
   comenzar
-    recorrerAvenida(1)
+    repetir 3 
+      derecha
+    recorrer
   fin
 variables
-  R2: robot1
-  R1: robot2
+  R1: robot1
+  R2: robot2
   R3: robot3
   R4: robot4
 comenzar
@@ -50,8 +53,8 @@ comenzar
   AsignarArea(R3, ciudad7)
   AsignarArea(R4, ciudad8)
   Iniciar(R1, 10,10)
-  Iniciar(R1, 10,20)
-  Iniciar(R1, 20,20)
-  Iniciar(R1, 20,10)
+  Iniciar(R2, 10,30)
+  Iniciar(R3, 30,30)
+  Iniciar(R4, 30,10)
   
 fin
